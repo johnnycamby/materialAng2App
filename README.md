@@ -1,7 +1,7 @@
 
 ## Description
 
- Angular4, Angular-material2, datavisualization (d3, ng-nvd3, nvd3), etc....   
+ Angular4, Angular-material2, datavisualization (d3, ng-nvd3, nvd3), Dynamic component loading etc....   
 
 ## Installation
 
