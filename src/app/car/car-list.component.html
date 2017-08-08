@@ -1,0 +1,51 @@
+
+<div class="panel">
+    <div class="panel-heading">{{pageTitle}}</div>
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-8">
+                <md-input-container style="width: 100%">
+                    <input mdInput placeholder="Filter by" type="text" [(ngModel)]="listFilter">
+                </md-input-container>               
+            </div>
+        </div>
+
+        <div class="row" *ngIf="listFilter">
+            <div class="col-md-6">
+                <h3>Filtered by: {{listFilter}}</h3>
+            </div>
+        </div>
+
+        <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+
+        <div class="row" *ngIf="cars && cars.length">
+            <div class="x-car-list">
+
+                <md-card class="col-sm-4 x-card" *ngFor="let car of cars | carFilter:listFilter">
+                    <md-card-header>
+                        <div md-card-avatar>
+                            <img class="img-circle" [src]="car.imageUrl" [title]="car.carName | uppercase" [style.width.px]="imageWidth" [style.margin.px]="imageMargin"
+                            />
+                        </div>
+                        <md-card-title> <a [routerLink]="['/cars', car.id]" [queryParams]="{filterBy: listFilter, showImage: showImage}">{{car.carName}}</a>                            </md-card-title>
+                        <md-card-subtitle> {{car.carModel}}
+                            <x-star [rating]="car.rating"></x-star>
+                        </md-card-subtitle>
+                    </md-card-header>
+                    <img [src]="car.imageUrl" [title]="car.carName | uppercase" class="img-rounded" [style.width.px]="imageLgWidth" [style.height.px]="imageLgHeight"
+                    />
+                    <md-card-content>
+                        <p>
+                            {{car.description}}
+                        </p>
+                    </md-card-content>
+                    <md-card-actions>
+                        <button md-button class="btn btn-sm"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+                        <button md-button class="btn btn-sm"><i class="fa fa-share-alt" aria-hidden="true"></i></button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="/">
+    <title>Acme Product Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="node_modules/nvd3/build/nv.d3.css">
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="https://rawgit.com/asotog/squeezebox/master/styles.css">
+    <link rel="stylesheet" href="node_modules/squeezebox/styles.css">
+    <link rel="stylesheet" href="./styles.css">
+
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="/node_modules/d3/d3.min.js"></script>
+    <script src="/node_modules/nvd3/build/nv.d3.min.js"></script>
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+        System.import('main.js').catch(function (err) { console.error(err); });
+        // System.import('main.js').then(null, console.error.bind(console));
+    </script>
+</head>
+
+<body>
+    <div layout="row" layout-fill class="layout-fill ng-scope layout-row">
+        <x-app>
+            <div class="load-container">
+                <div class="loader" *ngIf="loading"></div>
+            </div>
+        </x-app>
+    </div>
+
+
+    <script>
+        window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
+        ga('create', 'UA-8594346-24', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+    <!--<script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-8594346-23', 'auto');
+        ga('send', 'pageview');
+    </script>-->
+   
+   
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<div class="panel-body">
+    <form class="form-horizontal" novalidate autocomplete="off" (ngSubmit)="save()" [formGroup]="helpForm">
+
+        <fieldset>
+
+            <legend>Enter Help info:: </legend>
+
+            <div class="form-group" [ngClass]="{ 'has-error': (helpForm.get('email').touch || helpForm.get('email').dirty) && !helpForm.get('email').valid}">
+                <div class="col-md-8">
+                    <md-input-container style="width: 100%">
+                        <input mdInput id="email" type="email" name="email" placeholder="Email (required)" formControlName="email" />
+                        <span class="help-block" *ngIf="(helpForm.get('email').touch || helpForm.get('email').dirty )  && helpForm.get('email').errors">
+                        <span *ngIf="helpForm.get('email').errors?.required"> Email is required </span>
+                        </span>
+                    </md-input-container>
+                </div>
+            </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': !helpForm.get('phone').valid}">
+                <div class="col-md-8">
+                    <md-input-container style="width: 100%">
+                        <input mdInput id="phone" type="tel" name="phone" placeholder="Phone (required)" formControlName="phone" />
+                        <span class="help-block" *ngIf="helpForm.get('phone').errors">
+                        <span *ngIf="helpForm.get('phone').errors.required"> Phone is required </span>
+                        </span>
+                    </md-input-container>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-6 control-label">Send Notifications</label>
+                <div class="col-md-8">
+                    <md-radio-group>
+                        <md-radio-button ngDefaultControl formControlName="notification" value="email">Email</md-radio-button>
+                        <md-radio-button ngDefaultControl formControlName="notification" value="text">Text</md-radio-button>
+                    </md-radio-group>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-8">
+                    <md-checkbox formControlName="sendCatalog">Send me your catalog!</md-checkbox>
+                </div>
+            </div>
+
+            <div *ngIf="helpForm.get('sendCatalog').value">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <span>
+                            <button md-button [disabled]="!addresses.valid" (tap)="addAddress()" class="btn btn-primary">Add Another Address</button>                                
+                        </span>
+                    </div>
+                    <div formArrayName="addresses" *ngFor="let address of addresses.controls; let i=index">
+                        <div [formGroupName]="i">
+                            <div class="form-group">
+                                <label class="col-md-6 control-label">Address Type</label>
+                                <div class="col-md-8">
+                                    <md-radio-group>
+                                        <md-radio-button ngDefaultControl id="{{'address1Id' + i }}" formControlName="address" value="home">Home</md-radio-button>
+                                        <md-radio-button ngDefaultControl id="{{'address1Id' + i }}" formControlName="address" value="work">Work</md-radio-button>
+                                        <md-radio-button ngDefaultControl id="{{'address1Id' + i }}" formControlName="address" value="other">Other</md-radio-button>
+                                    </md-radio-group>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <md-input-container style="width: 100%">
+                                        <input mdInput ngDefaultControl type="text" id="{{'street1Id' + i}}" placeholder="Street Address" formControlName="street">
+                                    </md-input-container>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <md-input-container style="width: 100%">
+                                        <input mdInput ngDefaultControl type="text" id="{{'street1Id' + i}}" placeholder="City" formControlName="city">
+                                    </md-input-container>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <md-input-container style="width: 100%">
+                                        <input mdInput ngDefaultControl type="number" id="{{'zipId' + i}}" placeholder="Zip" formControlName="zip">
+                                    </md-input-container>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <md-select placeholder="Favorite State">
+                                        <md-option *ngFor="let state of states" [value]="state.value" ngDefaultControl>
+                                            {{ state.viewValue }}
+                                        </md-option>
+                                    </md-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<div class="form-group">
+    <div class="col-md-4 ">
+        <span>
+          <button md-button type="sbmit" [disabled]="!addresses.valid" class="btn btn-primary">Save</button>
+        </span>
+    </div>
+</div>
+
+</fieldset>
+</form>
+<div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+</div>
+
+<div id="map" style="width:400px;height:400px;"></div>
+

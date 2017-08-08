@@ -1,0 +1,25 @@
+<md-card style="height: 600px;">
+    <div class="row">
+        <div class="col-md-3">
+            <md-card-header>
+                <md-card-title> {{car.carName}} </md-card-title>
+                <md-card-subtitle> {{car.carModel}}
+                    <x-star [rating]="car.rating"></x-star>
+                </md-card-subtitle>
+            </md-card-header>
+        </div>
+    </div>
+
+    <div class="col-md-4" *ngIf="car.imageUrl">
+        <img [src]="car.imageUrl" [title]="car.carName | uppercase" class="center-block img-responsive" [style.width.px]="200" [style.height.px]="200"
+            [style.margin.px]="2" />
+    </div>
+    <md-card-content>
+        <p> {{car.description}} </p>
+    </md-card-content>
+    <md-card-actions>
+        <button md-button class="btn btn-default" [routerLink]="['/cars']" [preserveQueryParams]="true"><i class="fa fa-backward" aria-hidden="true"></i> Back</button>
+        <button md-button class="btn btn-default" (tap)="openDialog()"><i class="fa fa-tachometer" aria-hidden="true"></i> Analytics</button>
+        <button md-button class="btn btn-primary" [routerLink]="['/cars', car.id, 'edit']"><i class="fa fa-edit" aria-hidden="true"></i> Edit</button>
+    </md-card-actions>
+</md-card>

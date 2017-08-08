@@ -1,0 +1,127 @@
+
+
+/*@import url('node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css');*/
+@import url('node_modules/@angular/material/prebuilt-themes/indigo-pink.css');
+
+
+/* You can add global styles to this file, and also import other style files */
+html {
+  height: 100vh;
+  width:100vw;
+  /*box-sizing: border-box;*/
+  overflow-x: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.nav-item {        
+    color: #fff;
+}
+
+.load-container {
+  position: relative;
+    display: flex;
+    height:50vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+.sloader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    z-index: 10;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+         -webkit-transform: rotate(359deg);
+        transform: rotate(360deg);
+    }
+}
+
+* Fade transition */
+/*x-app div {
+    animation-duration: .5s;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+    transition: transform .5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}*/
+
+/* Slide transition */
+x-app div.panel {
+    animation-duration: .5s;
+    animation-name: slideIn;
+    animation-fill-mode: forwards;
+    transition: transform .5s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translate(-200px);
+  }
+
+  to {
+    transform: translate(0px);
+  }
+}
+

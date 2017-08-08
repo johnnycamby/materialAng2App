@@ -1,0 +1,93 @@
+<div class="sloader" *ngIf="loading"></div>
+
+<div class="x-comp">
+    <md-toolbar color="primary">
+        <span class="x-span-bar">
+            <span *ngIf="isMobile" (tap)="hideNav()">
+                <button md-button> <md-icon>menu</md-icon> </button>
+            </span>
+        </span> {{pageTitle}}
+        <span class="x-space-filler"></span>
+        <span style="padding-right: 4em;">
+           <button md-icon-button [mdMenuTriggerFor]="menu" > <md-icon>more_vert</md-icon> </button>
+        </span>
+        <md-menu #menu="mdMenu">
+            <button md-menu-item *ngIf="authService.isLoggedIn()" (tap)="openDialog()"> <md-icon></md-icon> <span> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Welcome {{authService.currentUser.userName}} </span> </button>
+            <button md-menu-item *ngIf="!messageService.isDisplayed" (tap)="displayMessages()"> <md-icon></md-icon> <span> <i class="fa fa-commenting-o" aria-hidden="true"></i> Show Messages  </span> </button>
+            <button md-menu-item *ngIf="messageService.isDisplayed" (tap)="hideMessages()"> <md-icon></md-icon> <span> <i class="fa fa-commenting-o" aria-hidden="true"></i> Hide Messages  </span> </button>
+            <button md-menu-item *ngIf="!authService.isLoggedIn()" [routerLink]="['/login']"> <md-icon></md-icon> <span> <i class="fa fa-sign-in" aria-hidden="true"></i> Log In </span> </button>
+            <button md-menu-item  *ngIf="authService.isLoggedIn()" (tap)="logOut()"> <md-icon></md-icon> <span> <i class="fa fa-sign-out" aria-hidden="true"></i>Log Out </span> </button>
+        </md-menu>
+
+    </md-toolbar>
+
+    <md-sidenav-container>
+
+        <md-sidenav *ngIf="isMobile" #start mode="over" opened="false" (open)="closeStartButton.focus()">
+            <div class="nav-container">
+                <div class="nav-item">
+                    <ul class="list-unstyled">
+                        <li > 
+                          <a [routerLink]="['/welcome']" routerLinkActive="active"  > <i class="fa fa-home fa-2x" aria-hidden="true"></i> Home</a>
+                        </li>
+                        <li >
+                          <a [routerLink]="['/cars']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  > <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i> Cars List </a>
+                        </li>
+                        <li  >
+                          <a [routerLink]="['/cars', '0', 'edit']" routerLinkActive="active"  > <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i> Add Car </a>
+                        </li>      
+                        <li>
+                            <a [routerLink]="['/help']" routerLinkActive="active"> <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> Help </a>
+                        </li>                 
+                    </ul>                   
+                </div>
+               
+            </div>
+            <br>
+            <button class="x-btn" md-button #closeStartButton (click)="start.close()">Close</button>
+        </md-sidenav>
+
+        <md-sidenav class="is-mobile-sidenav" *ngIf="!isMobile" #end mode="side" opened="true" align="start">
+            <div class="nav-container">
+                <div class="nav-item">
+                    <ul class="list-unstyled">
+                        <li > 
+                          <a [routerLink]="['/welcome']" routerLinkActive="active"  > <i class="fa fa-home fa-2x" aria-hidden="true"></i> Home</a>
+                        </li>
+                        <li >
+                          <a [routerLink]="['/cars']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  > <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i> Cars List </a>
+                        </li>
+                        <li >
+                          <a [routerLink]="['/cars', '0', 'edit']" routerLinkActive="active"  > <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i> Add Car </a>
+                        </li>   
+                         <li>
+                            <a [routerLink]="['/help']" routerLinkActive="active"> <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i> Help </a>
+                        </li>                    
+                    </ul>                   
+                </div>                             
+            </div>
+            <br>
+            <button class="x-btn" md-button #closeStartButton (click)="start.close()">Close</button>
+        </md-sidenav>       
+
+        <div class="x-content">
+            <div class="x-main-container">
+                <div class="row">
+                    <div class="col-md-8">
+                       <router-outlet></router-outlet>
+                    </div>
+                    <div class="col-md-4" >
+                        <div style="margin: 2px;">
+                           <router-outlet name="popup" ></router-outlet>
+                           <router-outlet name="modal"></router-outlet>  
+                        </div>
+                    </div>
+                </div> 
+        </div>
+            
+            <div class="x-footer-container" color="primary" >
+                <div class="fa fa-share-alt" aria-hidden="true" (tap)="openShareBar()"></div>
+            </div>
+        </div>
+    </md-sidenav-container>
+</div>

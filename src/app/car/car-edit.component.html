@@ -1,0 +1,36 @@
+<div class="x-edit-card">
+    <md-card >
+        <md-card-header>            
+            <md-card-title>  {{pageTitle}} </md-card-title>           
+        </md-card-header>        
+        <md-card-content>
+           <div class="wizard">
+               <a [routerLink]="['info']" routerLinkActive="active">
+                   Basic info
+                   <span [ngClass]="{'glyphicon glyphicon-exclamation-sign' : !isValid('info')}"></span>
+               </a>
+               <a [routerLink]="['tags']" routerLinkActive="active">
+                   Search Tag
+                   <span [ngClass]="{'glyphicon glyphicon-exclamation-sign' : !isValid('tags')}"></span>
+               </a>
+           </div>
+           
+           <!-- directive to display a template for a children route in a parent template -->
+           <router-outlet></router-outlet>
+
+        </md-card-content>
+        <md-card-actions>
+            <span>
+                <button md-button class="btn btn-primary" style="width:80px;margin-right:10px" [disabled]="!isValid()" (tap)="saveCar()">Save</button>
+            </span>
+            
+            <span>
+                <a [routerLink]="['/cars']" class="btn btn-default">Cancel</a>
+            </span>
+            <span>
+                <a (tap)="deleteCar()" class="btn btn-default">Delete</a>
+            </span>
+        </md-card-actions>
+    </md-card>
+
+</div>

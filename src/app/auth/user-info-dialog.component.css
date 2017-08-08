@@ -1,0 +1,7 @@
+.panel .panel-heading .panel-title a {
+    text-decoration: none;
+}
+
+.x-panel-toggle {
+    float: right;
+}

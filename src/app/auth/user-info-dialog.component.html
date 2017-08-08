@@ -1,0 +1,143 @@
+<div class="row">
+    <div class="col-xs-12">
+
+         <accordion>
+            <accordion-group heading="UserInfo" [isOpened]="true">
+                <div class="x-edit-card">
+                    <md-card>
+                        <md-card-content>
+                            <form class="form-horizontal" novalidate autocomplete="off" [formGroup]="userForm">
+                                <div class="form-group" [ngClass]="{'has-error': (userForm.get('userName').touched || userForm.get('userName').dirty ) && !userForm.get('userName').valid }">
+                                    <div class="col-md-8">
+                                        <md-input-container style="width: 100%">
+                                            <input mdInput formControlName="userName" type="text" placeholder="Enter Username (required)" />
+                                            <md-error class="help-block" *ngIf="(userForm.get('userName').touched || userForm.get('userName').dirty ) && userForm.get('userName').errors">
+                                                <md-error *ngIf="userForm.get('userName').errors.required">Username is required</md-error>
+                                                <md-error *ngIf="userForm.get('userName').errors.minLength">Username must be at least 3 characters</md-error>
+                                            </md-error>
+                                        </md-input-container>
+                                    </div>
+                                </div>
+
+                                <div formGroupName="emailGroup" [ngClass]="{'has-error': userForm.get('emailGroup').errors }">
+                                    <div class="form-group" [ngClass]="{'has-error': emailMessage}">
+                                        <div class="col-md-8">
+                                            <md-input-container style="width: 100%">
+                                                <input mdInput formControlName="email" placeholder="Email (required)" />
+                                                <md-error class="help-block" *ngIf="emailMessage">{{emailMessage}}</md-error>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" [ngClass]="{'has-error': (userForm.get('emailGroup.confirmEmail').touched || userForm.get('emailGroup.confirmEmail').dirty ) && !userForm.get('emailGroup.confirmEmail').valid }">
+                                        <div class="col-md-8">
+                                            <md-input-container style="width: 100%">
+                                                <input mdInput type="email" formControlName="confirmEmail" placeholder="Re-Enter Email (required)" />
+                                                <md-error class="help-block" *ngIf="(userForm.get('emailGroup.confirmEmail').touched || userForm.get('emailGroup.confirmEmail').dirty ) && (userForm.get('emailGroup.confirmEmail').errors || userForm.get('emailGroup').errors )">
+                                                    <md-error *ngIf="userForm.get('emailGroup.confirmEmail').errors?.required"> Please confirm your email address. </md-error>
+                                                    <md-error *ngIf="userForm.get('emailGroup.confirmEmail').errors?.match"> The confirmation does not match the email address. </md-error>
+                                                </md-error>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" [ngClass]="{'has-error': (userForm.get('startDate').touched || userForm.get('startDate').dirty ) && !userForm.get('startDate').valid }">
+                                    <div class="col-md-8">
+                                        <md-input-container style="width: 100%">
+                                            <!--<input mdInput formControlName="startDate" [datePicker]="startDate" type="date" placeholder="Enter Start Date (required)" /> -->
+                                            <input mdInput formControlName="startDate" [mdDatepicker]="startDate"  placeholder="Enter Start Date (required)" />
+                                            <button mdSuffix [mdDatepickerToggle]="startDate"></button>                                           
+                                            <md-error class="help-block" *ngIf="(userForm.get('startDate').touched || userForm.get('startDate').dirty ) && userForm.get('startDate').errors">
+                                                <md-error *ngIf="userForm.get('startDate').errors.required">Start Date is required</md-error>
+                                            </md-error>
+                                        </md-input-container>
+                                        <md-datepicker #startDate></md-datepicker>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" [ngClass]="{'has-error': (userForm.get('bio').touched || userForm.get('bio').dirty ) && !userForm.get('bio').valid }">
+                                    <div class="col-md-8">
+                                        <md-input-container style="width: 100%">
+                                            <input mdInput formControlName="bio" type="text" placeholder="Enter Biography (required)" />
+                                            <md-hint align="start"><strong>Don't disclose too much personal info</strong> </md-hint>
+                                            <md-hint align="end">{{userForm.get('bio').value.length}} / 256</md-hint>
+                                            <md-error class="help-block" *ngIf="(userForm.get('bio').touched || userForm.get('bio').dirty ) && userForm.get('bio').errors">
+                                                <md-error *ngIf="userForm.get('bio').errors.required">Biography is required</md-error>
+                                                <md-error *ngIf="userForm.get('bio').errors.maxLength">Biography must be at most 150 characters</md-error>
+                                            </md-error>
+                                        </md-input-container>
+                                    </div>
+                                </div>                            
+                            </form>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </accordion-group>
+            <accordion-group heading="User Messages" (tap)="displayMessages()">                
+                <router-outlet name="popup"></router-outlet>
+            </accordion-group>
+        </accordion>
+
+        <!--<squeezebox [multiple]="false">
+
+            <sb-item>
+                <sb-item-head>UserInfo</sb-item-head>
+                <sb-item-body>
+                    <div class="x-edit-card">
+                        <md-card>
+                            <md-card-content>
+                                <form class="form-horizontal" novalidate autocomplete="off" [formGroup]="userForm">
+                                    <div class="form-group" [ngClass]="{'has-error': (userForm.get('userName').touched || userForm.get('userName').dirty ) && !userForm.get('userName').valid }">
+                                        <div class="col-md-8">
+                                            <md-input-container style="width: 100%">
+                                                <input mdInput formControlName="userName" type="text" placeholder="Enter Username (required)" />
+                                                <md-error class="help-block" *ngIf="(userForm.get('userName').touched || userForm.get('userName').dirty ) && userForm.get('userName').errors">
+                                                    <md-error *ngIf="userForm.get('userName').errors.required">Username is required</md-error>
+                                                    <md-error *ngIf="userForm.get('userName').errors.minLength">Username must be at least 3 characters</md-error>
+                                                </md-error>
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+
+                                    <div formGroupName="emailGroup" [ngClass]="{'has-error': userForm.get('emailGroup').errors }">
+                                        <div class="form-group" [ngClass]="{'has-error': emailMessage}">
+                                            <div class="col-md-8">
+                                                <md-input-container style="width: 100%">
+                                                    <input mdInput formControlName="email" placeholder="Email (required)" />
+                                                    <md-error class="help-block" *ngIf="emailMessage">{{emailMessage}}</md-error>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" [ngClass]="{'has-error': (userForm.get('emailGroup.confirmEmail').touched || userForm.get('emailGroup.confirmEmail').dirty ) && !userForm.get('emailGroup.confirmEmail').valid }">
+                                            <div class="col-md-8">
+                                                <md-input-container style="width: 100%">
+                                                    <input mdInput type="email" formControlName="confirmEmail" placeholder="Re-Enter Email (required)" />
+                                                    <md-error class="help-block" *ngIf="(userForm.get('emailGroup.confirmEmail').touched || userForm.get('emailGroup.confirmEmail').dirty ) && (userForm.get('emailGroup.confirmEmail').errors || userForm.get('emailGroup').errors )">
+                                                        <md-error *ngIf="userForm.get('emailGroup.confirmEmail').errors?.required"> Please confirm your email address. </md-error>
+                                                        <md-error *ngIf="userForm.get('emailGroup.confirmEmail').errors?.match"> The confirmation does not match the email address. </md-error>
+                                                    </md-error>
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </sb-item-body>
+            </sb-item>
+
+            <sb-item [collapsed]="false">
+                <sb-item-head (tap)="displayMessages()">Messages</sb-item-head>
+                <sb-item-body>
+                     <router-outlet name="popup"></router-outlet>
+                </sb-item-body>
+            </sb-item>
+
+        </squeezebox>-->
+
+
+
+       
+    </div>
+</div>

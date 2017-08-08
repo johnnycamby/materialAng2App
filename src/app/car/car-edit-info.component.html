@@ -1,0 +1,48 @@
+<div class="panel-body">
+    <form class="form-horizontal" novalidate #carForm="ngForm">
+
+        <fieldset>
+
+        <legend>Basic Car Info::</legend>
+
+        <div class="form-group" [ngClass]="{ 'has-error': (carNameVar.touch || carNameVar.dirty || car.id !==0 ) && !carNameVar.valid}">
+            <div class="col-md-8">
+                <md-input-container style="width: 100%">
+                    <input mdInput id="carNameId" type="text" required minlength="3" name="carName" placeholder="Name (required)" [(ngModel)] = "car.carName" #carNameVar="ngModel" />
+                    <span class="help-block" *ngIf="(carNameVar.touch || carNameVar.dirty || car.id !== 0 )  && carNameVar.errors">
+                        <span *ngIf="carNameVar.errors.required"> Car name is required </span>
+                        <span *ngIf="carNameVar.errors.minlength"> Car name must be at least 3 characters. </span>
+                    </span>
+                </md-input-container>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': (carModelVar.touch || carModelVar.dirty || car.id !==0 ) && !carModelVar.valid}">
+            <div class="col-md-8">
+                <md-input-container style="width: 100%">
+                    <input mdInput id="carModel" type="text" required minlength="3" name="carModel" placeholder="Car Model (required)" [(ngModel)]= "car.carModel" #carModelVar="ngModel" />
+                    <span class="help-block" *ngIf="(carModelVar.touch || carModelVar.dirty || car.id !== 0 )  && carModelVar.errors">
+                        <span *ngIf="carModelVar.errors.required"> Car model is required </span>
+                        <span *ngIf="carModelVar.errors.minlength"> Car model must be at least 3 characters. </span>
+                    </span>
+                </md-input-container>
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{ 'has-error': (descriptionVar.touch || descriptionVar.dirty || car.id !==0 ) && !descriptionVar.valid}">
+            <div class="col-md-8">
+                <md-input-container style="width: 100%">
+                    <input mdInput id="descriptionId" type="textarea" required row="3" name="description" placeholder="Description (required)" [(ngModel)] = "car.description" #descriptionVar="ngModel" />
+                    <span class="help-block" *ngIf="(descriptionVar.touch || descriptionVar.dirty || car.id !== 0 )  && descriptionVar.errors">
+                        <span *ngIf="descriptionVar.errors.required"> Car description is required </span>
+                        <span *ngIf="descriptionVar.errors.minlength"> Car description must be at least 3 characters. </span>
+                    </span>
+                </md-input-container>
+            </div>
+        </div>
+
+        <!--<button md-raised-button (tap)=""></button>-->
+      </fieldset>  
+    </form>    
+       <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+</div>
